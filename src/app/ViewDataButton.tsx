@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from 'react';
-import { Dialog, DialogTitle, DialogContent, DialogActions, Button, Typography, Box } from '@mui/material';
+import { Dialog, DialogTitle, DialogContent, DialogActions, Button, Typography, Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 
 interface ViewDataProps {
   data: {
@@ -26,68 +26,164 @@ interface ViewDataProps {
 const ViewDataButton: React.FC<ViewDataProps> = ({ data }) => {
   const [open, setOpen] = useState(false);
 
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
   return (
-    <div>
-      <Button   sx={{
-        backgroundColor: 'black',
-        color: 'white',
-        '&:hover': {
-          backgroundColor: 'white',
-          color: 'black'
-        },
-      }} variant="contained" color="primary" onClick={handleOpen} >
+    <>
+      <Button
+        sx={{
+          backgroundColor: 'black',
+          fontWeight: 'bold',
+          color: 'white',
+          '&:hover': {
+            backgroundColor: 'darkgray',
+          },
+        }}
+        onClick={() => setOpen(true)}
+      >
         View Data
       </Button>
-      <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
-        <DialogTitle>User Data</DialogTitle>
-        <DialogContent dividers>
-          {data.map((item, index) => (
-            <div key={index}>
-              <Typography variant="body1">Sr No: {item.srNo}</Typography>
-              <Typography variant="body1">Farmer Name: {item.farmerName}</Typography>
-              <Typography variant="body1">Mobile No: {item.mobileNo}</Typography>
-              <Typography variant="body1">Village: {item.village}</Typography>
-              <Typography variant="body1">Crop Name: {item.cropName}</Typography>
-              <Typography variant="body1">Area: {item.area}</Typography>
-              <Typography variant="body1">Quantity: {item.quantity}</Typography>
-              <Typography variant="body1">Token: {item.token}</Typography>
-              <Typography variant="body1">Payment Type: {item.paymentType}</Typography>
-              <Typography variant="body1">Total Amount: {item.totalAmount}</Typography>
-              <Typography variant="body1">Paid Amount: {item.paidAmount}</Typography>
-              <Typography variant="body1">Balance Amount: {item.balanceAmount}</Typography>
-              <Typography variant="body1">Payment Status: {item.paymentStatus}</Typography>
-              <Typography variant="body1">Remark: {item.remark}</Typography>
-              <Typography variant="body1">Booking Date: {item.bookingDate}</Typography>
-              <Typography variant="body1">Fertilizer Sparing Date: {item.fertilizerSparingDate}</Typography>
-              <hr />
-            </div>
+      <Dialog open={open} onClose={() => setOpen(false)} maxWidth="md" fullWidth>
+        <DialogTitle  sx={{
+          fontWeight: '600',
+  
+        }}>View Report</DialogTitle>
+        
+        <DialogContent sx={{ backgroundColor: '#ececec', padding: '15px' }}>
+    {data.map((item, index) => (
+      <Box key={index} mb={2} sx={{ mt: 2 }}>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            marginBottom: '10px',
+            backgroundColor: 'white',
+            boxShadow: '0px 3px 6px rgba(0, 0, 0, 0.16)',
+            padding: '16px',
+            borderRadius: '4px',
+          }}
+        >
+          <img src="snake-1.png" alt="Logo" style={{ height: '50px' }} />
+          <div style={{ textAlign: 'right' }}>
+            <p>nerul , sec20</p>
+            <p>naviMumbai, maharashtra, 400 706</p>
+            <p>india</p>
+          </div>
+        </div>
+
+
+              <TableContainer component={Paper}>
+                <Table size="medium">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell colSpan={3}><Typography variant="h6">Contact Details</Typography></TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell sx={{ borderBottom: '2px solid #000' }}>Farmer Name</TableCell>
+                      <TableCell sx={{ borderBottom: '2px solid #000' }}>Mobile No</TableCell>
+                      <TableCell sx={{ borderBottom: '2px solid #000' }}>Village</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell sx={{ borderBottom: '2px solid #000' }}>{item.farmerName}</TableCell>
+                      <TableCell sx={{ borderBottom: '2px solid #000' }}>{item.mobileNo}</TableCell>
+                      <TableCell sx={{ borderBottom: '2px solid #000' }}>{item.village}</TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </TableContainer>
+              <TableContainer component={Paper} sx={{ mt: 2 }}>
+                <Table size="medium">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell colSpan={4}><Typography variant="h6">Crop Details</Typography></TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell sx={{ borderBottom: '2px solid #000' }}>Crop Name</TableCell>
+                      <TableCell sx={{ borderBottom: '2px solid #000' }}>Area</TableCell>
+                      <TableCell sx={{ borderBottom: '2px solid #000' }}>Quantity</TableCell>
+                      <TableCell sx={{ borderBottom: '2px solid #000' }}>Token</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell sx={{ borderBottom: '2px solid #000' }}>{item.cropName}</TableCell>
+                      <TableCell sx={{ borderBottom: '2px solid #000' }}>{item.area}</TableCell>
+                      <TableCell sx={{ borderBottom: '2px solid #000' }}>{item.quantity}</TableCell>
+                      <TableCell sx={{ borderBottom: '2px solid #000' }}>{item.token}</TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </TableContainer>
+              <TableContainer component={Paper} sx={{ mt: 2 }}>
+                <Table size="medium">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell colSpan={5}><Typography variant="h6">Payment Details</Typography></TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell sx={{ borderBottom: '2px solid #000' }}>Payment Type</TableCell>
+                      <TableCell sx={{ borderBottom: '2px solid #000' }}>Total Amount</TableCell>
+                      <TableCell sx={{ borderBottom: '2px solid #000' }}>Paid Amount</TableCell>
+                      <TableCell sx={{ borderBottom: '2px solid #000' }}>Balance Amount</TableCell>
+                      <TableCell sx={{ borderBottom: '2px solid #000' }}>Payment Status</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell sx={{ borderBottom: '2px solid #000' }}>{item.paymentType}</TableCell>
+                      <TableCell sx={{ borderBottom: '2px solid #000' }}>{item.totalAmount}</TableCell>
+                      <TableCell sx={{ borderBottom: '2px solid #000' }}>{item.paidAmount}</TableCell>
+                      <TableCell sx={{ borderBottom: '2px solid #000' }}>{item.balanceAmount}</TableCell>
+                      <TableCell sx={{ borderBottom: '2px solid #000' }}>{item.paymentStatus}</TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </TableContainer>
+              <TableContainer component={Paper} sx={{ mt: 2 }}>
+                <Table size="medium">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell colSpan={3}><Typography variant="h6">Other Details</Typography></TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell sx={{ borderBottom: '2px solid #000' }}>Remark</TableCell>
+                      <TableCell sx={{ borderBottom: '2px solid #000' }}>Booking Date</TableCell>
+                      <TableCell sx={{ borderBottom: '2px solid #000' }}>Fertilizer Sparing Date</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell sx={{ borderBottom: '2px solid #000' }}>{item.remark}</TableCell>
+                      <TableCell sx={{ borderBottom: '2px solid #000' }}>{item.bookingDate}</TableCell>
+                      <TableCell sx={{ borderBottom: '2px solid #000' }}>{item.fertilizerSparingDate}</TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </Box>
           ))}
         </DialogContent>
         <DialogActions>
-          <Box display="flex" justifyContent="center" width="100%">
-            <Button    
-    sx={{
-      backgroundColor: 'black',
-      color: 'white',
-      '&:hover': {
-        backgroundColor: 'white',
-        color: 'black'
-      },
-    }} variant="contained" color="primary" onClick={handleClose}>
-              Close
-            </Button>
-          </Box>
+        <Button
+  onClick={() => setOpen(false)}
+  sx={{
+    backgroundColor: 'black',
+    color: 'white',
+    '&:hover': {
+      backgroundColor: 'darkgray',
+      color: 'black'
+    },
+    padding: '8px 16px',
+    borderRadius: '4px',
+    textTransform: 'none',
+  }}
+>
+  Close
+</Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </>
   );
 };
 
